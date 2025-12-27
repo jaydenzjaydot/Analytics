@@ -1,0 +1,6 @@
+pandas
+SQLAlchemy
+numpy
+matplotlib
+seaborn
+urllib3
