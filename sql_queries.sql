@@ -25,7 +25,7 @@ FROM customer_behaviour.customer_data
 WHERE shipping_type IN ('Standard', 'Express')
 GROUP BY shipping_type;
 
--- Q5. Do subscibed customers spend more on average than non-subscribed customers?
+-- Q5. Do subscribed customers spend more on average than non-subscribed customers?
 SELECT subscription_status, ROUND(AVG(purchase_amount),2) AS avg_spent, ROUND(SUM(purchase_amount),2) AS total_revenue
 FROM customer_behaviour.customer_data
 GROUP BY subscription_status;

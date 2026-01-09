@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Savings & Loan System{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h1 class="display-4"><i class="bi bi-speedometer2"></i> Dashboard</h1>
+        <p class="text-muted">Overview of the Member Savings and Loan Scheme</p>
+    </div>
+</div>
+
+<!-- Statistics Cards -->
+<div class="row mb-4">
+    <div class="col-md-3 mb-3">
+        <div class="card stat-card">
+            <div class="card-body text-center">
+                <i class="bi bi-people" style="font-size: 2rem;"></i>
+                <div class="stat-value mt-2">{{ total_members }}</div>
+                <div class="mt-2">Total Members</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card stat-card" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+            <div class="card-body text-center">
+                <i class="bi bi-wallet2" style="font-size: 2rem;"></i>
+                <div class="stat-value mt-2">SZL {{ "{:,.2f}".format(total_savings) }}</div>
+                <div class="mt-2">Total Savings</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card stat-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+            <div class="card-body text-center">
+                <i class="bi bi-cash-coin" style="font-size: 2rem;"></i>
+                <div class="stat-value mt-2">SZL {{ "{:,.2f}".format(total_loans) }}</div>
+                <div class="mt-2">Active Loans</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card stat-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+            <div class="card-body text-center">
+                <i class="bi bi-exclamation-triangle" style="font-size: 2rem;"></i>
+                <div class="stat-value mt-2">{{ overdue_loans }}</div>
+                <div class="mt-2">Overdue Loans</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="bi bi-lightning-charge"></i> Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-2">
+                        <a href="{{ url_for('add_member') }}" class="btn btn-primary w-100">
+                            <i class="bi bi-person-plus"></i> Register New Member
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="{{ url_for('list_members') }}" class="btn btn-outline-primary w-100">
+                            <i class="bi bi-people"></i> View All Members
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="{{ url_for('process_overdue') }}" class="btn btn-warning w-100">
+                            <i class="bi bi-clock-history"></i> Process Overdue Interest
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <a href="{{ url_for('export_members_csv') }}" class="btn btn-success w-100">
+                            <i class="bi bi-download"></i> Export Members CSV
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- System Information -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="bi bi-info-circle"></i> System Rules & Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6><i class="bi bi-wallet2 text-success"></i> Savings Rules:</h6>
+                        <ul>
+                            <li>Initial deposit: <strong>SZL 1,000.00</strong></li>
+                            <li>Monthly subscription: <strong>SZL 500.00</strong></li>
+                            <li>Subscription period: <strong>12 months</strong></li>
+                            <li>All transactions are recorded historically</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6><i class="bi bi-cash-coin text-danger"></i> Loan Rules:</h6>
+                        <ul>
+                            <li>Interest rate: <strong>20%</strong></li>
+                            <li>Interest calculated on loan amount at issue</li>
+                            <li>Repayments due on the <strong>5th of every month</strong></li>
+                            <li>Late payments: <strong>20% compound interest</strong> per month on outstanding balance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
